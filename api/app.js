@@ -7,15 +7,16 @@ const mongoose = require('mongoose');
 //below will give us access to what we have created in .env
 require('dotenv/config');
 
+//middleware
+app.use(express.json());
+
 //Import routes
-const testRoutes = require('./routes/tests');
-//const userRoutes = require('./routes/users');
+const userRoutes = require('./routes/users');
 //const customerRoutes = require('./routes/customers');
 //const animalRoutes = require('./routes/animals');
 
 //using routes
-app.use('/tests', testRoutes);
-//app.use('/users', userRoutes);
+app.use('/users', userRoutes);
 //app.use('/customers', customerRoutes);
 //app.use('/animals', animalRoutes);
 
