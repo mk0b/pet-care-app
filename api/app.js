@@ -22,6 +22,7 @@ mongoose.connect(
     () => console.log('Succesfully connected to MongoDB Atlas!')
 );
 
-//TODO: Add a message to the console saying that the server has started and the port iti s listening on. Switch this to 8000?
 //listening to the server
-app.listen(5000);
+app.listen(5000, () => {
+    console.log('Listening on port 5000.');
+});
