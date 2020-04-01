@@ -42,6 +42,15 @@ router.post('/', asyncHelper(async(req, res) => {
 
 /* GET */
 
+router.get('/', asyncHelper(async(req, res) => {
+    try {
+        //get all of the users
+        const users = await User.find();
+        res.send(users);
+    } catch (error) {
+        res.json({ message: error });
+    }
+}));
 
 
 /* PUT */
