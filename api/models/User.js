@@ -18,7 +18,6 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date: Date.now
 });
 
 //below creates the model gives it a name and tells it which schema to use for mlabs
