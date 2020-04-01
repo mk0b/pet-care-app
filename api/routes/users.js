@@ -32,7 +32,7 @@ router.post('/', asyncHelper(async(req, res) => {
         await user.save();
         //setting the status code to 201 and setting the location and responding with nothing back.
         res.status(201).location('/').end();
-        console.log('User succesfully created!');
+        console.log('User successfully created!');
     } catch (error) {
         console.log('An error occurred: ', error.name);
         //only putting 500 for bad request for now.
@@ -52,10 +52,52 @@ router.get('/', asyncHelper(async(req, res) => {
     }
 }));
 
+//get a specific user
+
+router.get('/:userId', asyncHelper(async(req, res) => {
+    try {
+        //getting the userId from the URL
+        console.log('User ID: ', req.params.userId);
+        const user = await User.findById(req.params.userId);
+        res.json(user);
+    } catch (error) {
+        res.json({ message: error });
+    }
+}))
+
 
 /* PUT */
 
+//research patch vs. put
+
+router.patch('/:userId', asyncHelper(async(req, res) => {
+    try {
+        const user = await User.updateOne(
+            { _id: req.params.userId },
+            { $set: { firstName: req.body.firstName } 
+        });
+        console.log(`${user} was updated!`);
+    } catch (error) {
+        console.log({ message: error});
+    }
+}));
+
 /* DELETE */
+
+//use router.delete
+//get the id from the url
+//cont user = User.remove(id goes in here);
+
+router.delete('/:postId', asyncHelper(async(req, res) => {
+    try {
+        const user = await User.remove({ _id: req.params.userId });
+        res.status(201).end();
+        console.log(`${user} was successfully deleted.`);
+    } catch (error) {
+        console.log({ message: error});
+    }
+}));
+
 
 module.exports = router;
 
