@@ -68,7 +68,7 @@ router.get('/:userId', asyncHelper(async(req, res) => {
 
 /* PUT */
 
-//research patch vs. put
+//basically patch is a partial update only what has been changed and put replaces all items
 
 router.patch('/:userId', asyncHelper(async(req, res) => {
     try {
@@ -88,9 +88,13 @@ router.patch('/:userId', asyncHelper(async(req, res) => {
 //get the id from the url
 //cont user = User.remove(id goes in here);
 
-router.delete('/:postId', asyncHelper(async(req, res) => {
+router.delete('/:userId', asyncHelper(async(req, res) => {
     try {
-        const user = await User.remove({ _id: req.params.userId });
+        const user = await User.deleteOne({ _id: req.params.userId }, (err) => {
+            if (err) {
+                return handleError(err);
+            }
+        });
         res.status(201).end();
         console.log(`${user} was successfully deleted.`);
     } catch (error) {
