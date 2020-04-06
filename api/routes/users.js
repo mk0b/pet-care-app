@@ -16,6 +16,7 @@ function asyncHelper(callback){
 }
 
 //TODO: Add appropriate status codes and error messaging
+//add more error handling?
 
 /* POST */
 
@@ -76,6 +77,7 @@ router.patch('/:userId', asyncHelper(async(req, res) => {
             { _id: req.params.userId },
             { $set: { firstName: req.body.firstName } 
         });
+        res.status(204).end();
         console.log(`${user} was updated!`);
     } catch (error) {
         console.log({ message: error});
@@ -84,10 +86,6 @@ router.patch('/:userId', asyncHelper(async(req, res) => {
 
 /* DELETE */
 
-//use router.delete
-//get the id from the url
-//cont user = User.remove(id goes in here);
-
 router.delete('/:userId', asyncHelper(async(req, res) => {
     try {
         const user = await User.deleteOne({ _id: req.params.userId }, (err) => {
@@ -95,7 +93,7 @@ router.delete('/:userId', asyncHelper(async(req, res) => {
                 return handleError(err);
             }
         });
-        res.status(201).end();
+        res.status(204).end();
         console.log(`${user} was successfully deleted.`);
     } catch (error) {
         console.log({ message: error});
