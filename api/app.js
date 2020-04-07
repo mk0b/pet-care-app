@@ -12,13 +12,13 @@ app.use(express.json());
 
 //Import routes
 const userRoutes = require('./routes/users');
-//const customerRoutes = require('./routes/customers');
-//const animalRoutes = require('./routes/animals');
+const customerRoutes = require('./routes/customers');
+const animalRoutes = require('./routes/animals');
 
 //using routes
 app.use('/users', userRoutes);
-//app.use('/customers', customerRoutes);
-//app.use('/animals', animalRoutes);
+app.use('/customers', customerRoutes);
+app.use('/animals', animalRoutes);
 
 
 //Routes

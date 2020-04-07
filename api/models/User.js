@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//TODO: Research relations. A user owns customers customers own animals etc.
+
 //create a schema | describing how the data should look
 const UserSchema = mongoose.Schema({
     firstName: {
