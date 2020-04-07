@@ -18,6 +18,10 @@ function asyncHelper(callback){
 //TODO: Add appropriate status codes and error messaging
 //add more error handling?
 
+//TODO: Add auth handling
+
+//TODO: Add password hashing with bcryptjs
+
 /* POST */
 
 //create a new user
@@ -36,8 +40,7 @@ router.post('/', asyncHelper(async(req, res) => {
         console.log('User successfully created!');
     } catch (error) {
         console.log('An error occurred: ', error.name);
-        //only putting 500 for bad request for now.
-        res.status(500).json({ message: error});
+        res.status(401).json({ message: error});
     }
 }));
 
@@ -71,11 +74,19 @@ router.get('/:userId', asyncHelper(async(req, res) => {
 
 //basically patch is a partial update only what has been changed and put replaces all items
 
-router.patch('/:userId', asyncHelper(async(req, res) => {
+//PATCH - if I put all of the items there and only one is updated the others show as null.
+
+//I think I am going to switch this to put for now.
+
+router.put('/:userId', asyncHelper(async(req, res) => {
     try {
         const user = await User.updateOne(
             { _id: req.params.userId },
-            { $set: { firstName: req.body.firstName } 
+            { $set: { firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        emailAddress: req.body.emailAddress,
+                        password: req.body.password
+                    } 
         });
         res.status(204).end();
         console.log(`${user} was updated!`);
