@@ -18,10 +18,41 @@ function asyncHelper(callback){
 /* POST */
 
 //create a new customer
-router.post();
+router.post('/', asyncHelper(async(req, res) => {
+    try {
+        console.log('Req Body / POST: ', req.body);
+        const customer = new Customer({
+            customerName1: req.body.customerName1,
+            customerName2: req.body.customerName2,
+            phone: req.body.phone,
+            emailAddress: req.body.emailAddress,
+            streetAddress: req.body.streetAddress,
+            city: req.body.city,
+            state: req.body.state,
+            country: req.body.country,
+        });
+        await customer.save();
+        res.status(201).location('/').end();
+    } catch (error) {
+        console.log('An error occurred: ', error.name);
+        res.status(401).json({ message: error});
+    }
+}));
 
 
 /* GET */
+
+//get a list of all users
+router.get('/', asyncHelper(async(req, res) => {
+    try {
+        const customers = await Customer.find();
+        res.send(customers);
+    } catch (error) {
+        res.json({ message: error });
+    }
+}));
+
+//get a specific user
 
 /* PUT */
 

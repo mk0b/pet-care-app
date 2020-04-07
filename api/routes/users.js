@@ -46,9 +46,9 @@ router.post('/', asyncHelper(async(req, res) => {
 
 /* GET */
 
+//get a list of all users
 router.get('/', asyncHelper(async(req, res) => {
     try {
-        //get all of the users
         const users = await User.find();
         res.send(users);
     } catch (error) {
@@ -57,7 +57,6 @@ router.get('/', asyncHelper(async(req, res) => {
 }));
 
 //get a specific user
-
 router.get('/:userId', asyncHelper(async(req, res) => {
     try {
         //getting the userId from the URL
@@ -97,6 +96,7 @@ router.put('/:userId', asyncHelper(async(req, res) => {
 
 /* DELETE */
 
+//delete a user
 router.delete('/:userId', asyncHelper(async(req, res) => {
     try {
         const user = await User.deleteOne({ _id: req.params.userId }, (err) => {
