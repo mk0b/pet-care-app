@@ -20,5 +20,5 @@ const UserSchema = mongoose.Schema({
     },
 });
 
-//below creates the model gives it a name and tells it which schema to use for mlabs
+//below creates the model gives it a name and tells it which schema to use for dbatlas
 module.exports = mongoose.model('Users', UserSchema);
