@@ -46,7 +46,7 @@ router.post('/', asyncHelper(async(req, res) => {
 router.get('/', asyncHelper(async(req, res) => {
     try {
         const customers = await Customer.find();
-        res.send(customers);
+        res.json(customers);
     } catch (error) {
         res.json({ message: error });
     }
@@ -65,6 +65,7 @@ router.get('/:customerId', asyncHelper(async(req, res) => {
 
 /* PUT */
 
+//update a customer
 router.put('/:customerId', asyncHelper(async(req, res) => {
     try {
         const customer = await Customer.updateOne(
@@ -81,7 +82,7 @@ router.put('/:customerId', asyncHelper(async(req, res) => {
                     }
             });
             res.status(204).end();
-            console.log('User was updated!');
+            console.log('Customer was updated!');
     } catch (error) {
         console.log({ message: error });
     }
@@ -94,7 +95,7 @@ router.delete('/:customerId', asyncHelper(async(req, res) => {
     try {
         const customer = await Customer.deleteOne({ _id: req.params.customerId });
         res.status(204).end();
-        console.log('User was deleted.');
+        console.log('Customer was deleted.');
     } catch (error) {
         console.log({ message: error });
     }

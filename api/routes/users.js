@@ -50,7 +50,7 @@ router.post('/', asyncHelper(async(req, res) => {
 router.get('/', asyncHelper(async(req, res) => {
     try {
         const users = await User.find();
-        res.send(users);
+        res.json(users);
     } catch (error) {
         res.json({ message: error });
     }
@@ -77,6 +77,7 @@ router.get('/:userId', asyncHelper(async(req, res) => {
 
 //I think I am going to switch this to put for now.
 
+//update a user
 router.put('/:userId', asyncHelper(async(req, res) => {
     try {
         const user = await User.updateOne(
