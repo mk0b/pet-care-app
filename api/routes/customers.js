@@ -89,5 +89,16 @@ router.put('/:customerId', asyncHelper(async(req, res) => {
 
 /* DELETE */
 
+//delete a customer
+router.delete('/:customerId', asyncHelper(async(req, res) => {
+    try {
+        const customer = await Customer.deleteOne({ _id: req.params.customerId });
+        res.status(204).end();
+        console.log('User was deleted.');
+    } catch (error) {
+        console.log({ message: error });
+    }
+}));
+
 module.exports = router;
 
