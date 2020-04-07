@@ -42,7 +42,7 @@ router.post('/', asyncHelper(async(req, res) => {
 
 /* GET */
 
-//get a list of all users
+//get a list of all customers
 router.get('/', asyncHelper(async(req, res) => {
     try {
         const customers = await Customer.find();
@@ -52,7 +52,16 @@ router.get('/', asyncHelper(async(req, res) => {
     }
 }));
 
-//get a specific user
+//get a specific customer
+router.get('/:customerId', asyncHelper(async(req, res) => {
+    try {
+        const customer = await Customer.findById(req.params.customerId);
+        res.json(customer);
+    } catch (error) {
+        res.json({ message: error });
+    }
+}));
+
 
 /* PUT */
 
