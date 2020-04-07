@@ -83,4 +83,14 @@ router.put('/:animalId', asyncHelper(async(req, res) => {
 
 /* DELETE */
 
+router.delete('/:animalId', asyncHelper(async(req, res) => {
+    try {
+        const animal = await Animal.deleteOne({ _id: req.params.animalId });
+        res.status(204).end();
+        console.log('Animal was deleted.');
+    } catch (error) {
+        console.log({ message: error });
+    }
+}));
+
 module.exports = router;
