@@ -65,6 +65,28 @@ router.get('/:customerId', asyncHelper(async(req, res) => {
 
 /* PUT */
 
+router.put('/:customerId', asyncHelper(async(req, res) => {
+    try {
+        const customer = await Customer.updateOne(
+            { _id: req.params.customerId },
+            { $set: {
+                    customerName1: req.body.customerName1,
+                    customerName2: req.body.customerName2,
+                    phone: req.body.phone,
+                    emailAddress: req.body.emailAddress,
+                    streetAddress: req.body.streetAddress,
+                    city: req.body.city,
+                    state: req.body.state,
+                    country: req.body.country,
+                    }
+            });
+            res.status(204).end();
+            console.log('User was updated!');
+    } catch (error) {
+        console.log({ message: error });
+    }
+}));
+
 /* DELETE */
 
 module.exports = router;

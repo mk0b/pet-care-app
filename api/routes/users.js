@@ -66,7 +66,7 @@ router.get('/:userId', asyncHelper(async(req, res) => {
     } catch (error) {
         res.json({ message: error });
     }
-}))
+}));
 
 
 /* PUT */
@@ -81,14 +81,15 @@ router.put('/:userId', asyncHelper(async(req, res) => {
     try {
         const user = await User.updateOne(
             { _id: req.params.userId },
-            { $set: { firstName: req.body.firstName,
-                        lastName: req.body.lastName,
-                        emailAddress: req.body.emailAddress,
-                        password: req.body.password
+            { $set: { 
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    emailAddress: req.body.emailAddress,
+                    password: req.body.password
                     } 
         });
         res.status(204).end();
-        console.log(`${user} was updated!`);
+        console.log(`User was updated!`);
     } catch (error) {
         console.log({ message: error});
     }
