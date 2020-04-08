@@ -58,6 +58,30 @@ router.get('/:companyId', asyncHelper(async(req, res) => {
 
 /* PUT */
 
+//update a company
+router.put('/:companyId', asyncHelper(async(req, res) => {
+    try {
+        const company = await Company.updateOne(
+            { _id: req.params.companyId},
+            { $set: { companyName: req.body.companyName} }
+        );
+        res.status(204).end();
+        console.log({ message: error });
+    } catch (error) {
+        console.log({ message: error });
+    }
+}));
+
 /* DELETE */
+
+router.delete('/:companyId', asyncHelper(async(req, res) => {
+    try {
+        const company = await Company.deleteOne({ _id: req.params.companyId });
+        res.status(204).end();
+        console.log('Company was deleted.');
+    } catch (error) {
+        console.log({ message: error });
+    }
+}));
 
 module.exports = router;
