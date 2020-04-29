@@ -34,6 +34,9 @@ const CustomerSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    //db association to Animals collection
+    //will crash without mongoose at the start
+    animals: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Animals'}]
 });
 
 //below creates the model gives it a name and tells it which schema to use for db atlas

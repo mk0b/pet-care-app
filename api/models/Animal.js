@@ -22,6 +22,10 @@ const AnimalSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    //db association with customer
+    customer: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Customers'
+    }
 });
 
 //below creates the model gives it a name and tells it which schema to use for db atlas
